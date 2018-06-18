@@ -1,5 +1,5 @@
 # PDAC-phospho
-Phosphoproteomic analysis of TMEM16A knockdown and EGF treatment on pancreatic cancer line AsPc-1
+Phosphoproteomic analysis of TMEM16A knockdown and EGF treatment on pancreatic cancer line AsPc-1.
 
 ## Motivation
 The calcium-activated chloride channel (TMEM16A), also known as anoctamin 1 (ANO1), is over-expressed in many cancers. The transmembrane protein is an attractive cancer target owing to its ability to activate many signaling pathways, including the epidermal growth factor receptor (EGFR) signaling, to support cell growth and migration. However, the effect of TMEM16A on cellular phenotype appears to be cell- and tumor-specific (Molecular Cancer 2017). For instance, Wu et al. found that TMEM16A over-expression promotes proliferation in ER-positive, PR-positive, and HER2-negative MCF-7 cells, but inhibits proliferation in ER-negative, PR-negative, and HER2-negative MDA-MB-435S cells (Oncotarget 2017). This suggests that further validation of TMEM16A as a viable target is needed on a per-cell or -tumor basis.
