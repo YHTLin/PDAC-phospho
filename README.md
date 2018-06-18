@@ -11,3 +11,4 @@ Pancreatic ductal adenocarcinoma (PDAC) is the most common type of pancreatic ca
 + *crottes.RData*: Saved workspace from *phospho_crottes.R* and is loaded by *MaxQuant_report_crottes.Rmd*.
 + *MaxQuant_report_crottes.Rmd*: R Markdown file containing figures and descriptions.
 + *MaxQuant_report_crottes.pdf*: PDF generated from *.Rmd* file.
++ *TMEM16A-EGF-phospho-analysis.xlsx*: Output data file from phospho analysis.
