@@ -1,11 +1,11 @@
 ---
 title: "Phosphoproteomic analysis of TMEM16A knockdown and EGF treatment on pancreatic cancer line AsPc-1"
-date: "June 15, 2018"
+date: "August 2, 2018"
 output: pdf_document
 ---
 ```{r include=FALSE}
-setwd("C:/Users/Tony Lin/Desktop/Wiita_Lab/Projects/Proteomics_project/Crottes EGF and TMEM16A-dependent signaling pathway/analysis/180606 bR1+2/")
-load("crottes.RData")
+setwd("C:/Users/Tony Lin/Desktop/Wiita_Lab/Projects/Proteomics_project/Crottes EGF and TMEM16A-dependent signaling pathway/analysis/180802 bR1+2+3/")
+load("crottes-180802.RData")
 ```
 
 
@@ -35,17 +35,16 @@ Pancreatic ductal adenocarcinoma (PDAC) is the most common type of pancreatic ca
 3. Analyzed samples on LC-MS/MS.
     + Reconstituted peptides and injected 1$\mu$g of each sample onto the instrument.
     + Data acquisition with LC-MS/MS on a 4-hour gradient.
-    + Samples were queued up by replicates and sample conditions.
+    + Samples were queued up by replicates and sample conditions in the listed order.
         + First run: **shControl_CTRL_bR1**, **shControl_EGF_bR1**, **shTMEM_CTRL_bR1**, **shTMEM_EGF_bR1**.
         + Second run: **shControl_CTRL_bR2**, **shControl_EGF_bR2**, **shTMEM_CTRL_bR2**, **shTMEM_EGF_bR2**.
         + Third run: **shControl_CTRL_bR3**, **shControl_EGF_bR3**, **shTMEM_CTRL_bR3**, **shTMEM_EGF_bR3**.
-    + *Note: Replicate 3 not yet analyzed by mass spectrometry.*
 4. Processed MS data by MaxQuant using Phospho (STY) settings and match-between-runs.
 5. Data analysis and visualization in R.
     + **Filtering **
         + Remove contaminants and reverse hits.
         + Retain confident phosphosite identifications.
-        + Retain sites where at least 50% of replicates are quantified in one condition.
+        + Retain sites where at least two out of three replicates were quantified in one condition.
     + **Normalization**
         + Transform data by taking log~2~ of phosphosite intensities.
         + Quantile normalization to remove technical variabilities.
@@ -92,12 +91,16 @@ Samples & \# sites detected & \# sites quantified & \% sites quantified \\ [1ex]
 \hline \\ [-1.5ex]
 shControl\_CTRL\_bR1 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR1))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR1))/nrow(dataCFN)*100,1)`\\ [1ex]
 shControl\_CTRL\_bR2 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR2))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR2))/nrow(dataCFN)*100,1)`\\ [1ex]
+shControl\_CTRL\_bR3 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR3))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_CTRL_bR3))/nrow(dataCFN)*100,1)`\\ [1ex]
 shControl\_EGF\_bR1 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_EGF_bR1))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_EGF_bR1))/nrow(dataCFN)*100,1)`\\ [1ex]
 shControl\_EGF\_bR2 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_EGF_bR2))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_EGF_bR2))/nrow(dataCFN)*100,1)`\\ [1ex]
+shControl\_EGF\_bR3 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shControl_EGF_bR3))` & `r round(sum(is.finite(dataCFN$LOG2.shControl_EGF_bR3))/nrow(dataCFN)*100,1)`\\ [1ex]
 shTMEM\_CTRL\_bR1 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR1))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR1))/nrow(dataCFN)*100,1)`\\ [1ex]
 shTMEM\_CTRL\_bR2 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR2))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR2))/nrow(dataCFN)*100,1)`\\ [1ex]
+shTMEM\_CTRL\_bR3 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR3))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_CTRL_bR3))/nrow(dataCFN)*100,1)`\\ [1ex]
 shTMEM\_EGF\_bR1 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR1))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR1))/nrow(dataCFN)*100,1)`\\ [1ex]
 shTMEM\_EGF\_bR2 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR2))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR2))/nrow(dataCFN)*100,1)`\\ [1ex]
+shTMEM\_EGF\_bR3 & `r nrow(dataCFN)` & `r sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR3))` & `r round(sum(is.finite(dataCFN$LOG2.shTMEM_EGF_bR3))/nrow(dataCFN)*100,1)`\\ [1ex]
 \hline
 \end{tabular}
 \end{table}
@@ -117,17 +120,17 @@ plot_pairs(dataCFN, "^LOG2.shTMEM_CTRL", TRUE)
 plot_pairs(dataCFN, "^LOG2.shTMEM_EGF", TRUE)
 ```
 
-Figure 1 shows the relationship of phosphosite intensities between replicates. Each point in the scatter plot is a phosphosite quantified in both replicates. The line of best fit is drawn in red. The distribution of the normalized, log~2~-transformed phosphosite intensities are depicted as histograms along the diagonal. The Pearson correlation coefficients and the number of missing values present in the replicates are displayed in the bottom-left corner. These results suggest that a considerable amount of the variability exists between replicates, which is not surprising given the loosely conserved nature of phosphorylation marks and the stochasticity of acquisition method on the mass spectrometer. Additionally, batch effects could play a role since these samples were processed more than a year apart.
+Figure 1 shows the relationship of phosphosite intensities between replicates. Each point in the scatter plot is a phosphosite quantified in both replicates. The line of best fit is drawn in red. The distribution of the normalized, log~2~-transformed phosphosite intensities are depicted as histograms along the diagonal. The Pearson correlation coefficients and the number of missing values present in the replicates are displayed in the bottom-left corner. These results suggest that a considerable amount of the variability exists between replicates, which is not surprising given the loosely conserved nature of phosphorylation marks and the stochasticity of acquisition method on the mass spectrometer. Additionally, batch effects could play a role since replicate 1 was processed more than a year apart from replicate 2 and 3.
 
 
 \newpage
 ## Figure 2 - Histogram of phosphosite intensities by sample
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=8, fig.pos="!h"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5.5, fig.width=8, fig.pos="!h"}
 hist_impute(dataCFNI, use_keep = TRUE)
 ```
 
-Distribution of the measured phosphosite intensities and the imputed intensities are superimposed. Clearly, replicate 1 suffers more heavily from missing values than replicate 2. Nonetheless, the hybrid imputation method appears to have compensated for this loss by filling in more substitute values along the expected unimodal distribution. With a third replicate, this imputation strategy will become more reliable at assigning proper figures for missing data.
+Distribution of the measured phosphosite intensities and the imputed intensities are superimposed. Clearly, replicate 1 suffers more heavily from missing values than the other replicates. Nonetheless, the hybrid imputation method appears to have compensated for this loss by filling in more substitute values along the expected unimodal distribution.
 
 
 \newpage
@@ -143,7 +146,7 @@ plot_pairs(dataCFNI, "^LOG2.shTMEM_CTRL", TRUE)
 plot_pairs(dataCFNI, "^LOG2.shTMEM_EGF", TRUE)
 ```
 
-Here are the same sets of plots as **Figure 1** after data imputation has been performed. The imputation method resolves the missing data problem by inferring values that closely reflect replicate measurements. Therefore, it is perhaps not surprising that the correlation coefficients have improved upon imputation.
+Here is **Figure 1** after data imputation has been performed. The imputation method resolves the missing data problem by inferring values that closely reflect replicate measurements. Therefore, it is perhaps not surprising that the correlation coefficients have improved upon imputation.
 
 
 \newpage
@@ -159,7 +162,7 @@ plot_volcano(TvC, ratio_cutoff = log2(3), labeling = F, title = "shTMEM vs shCon
 plot_volcano(TegfvC, ratio_cutoff = log2(3), labeling = F, title = "shTMEM+EGF vs shControl")
 ```
 
-Volcano plots show the effect of perturbation on phosphorylation levels and the statistical significance of the change along the x- and y-axis, respectively. Each point represents a phosphosite, and the thresholds are drawn at a fold change of 3 (or 1.58 in log~2~) and P-value of 0.05. EGF stimulation appears to up-regulate phosphorylation in shControl cells but, interestingly, exerts the opposite effect in shTMEM cells. Additionally, the shape of the shTMEM-vs-shControl scatter resembles that of shControl+EGF-vs-shControl, weakly suggesting that TMEM16A knockdown and EGF stimulation may act on the cells in similar ways. To tease out any functional patterns among proteins whose phosphosites were differentially regulated, a GO enrichment analysis was performed on a list of proteins associated with the colored points above. A list of unregulated proteins identified in the phosphoproteomic analysis was supplied as a reference set. Unfortunately, no GO terms were significantly enriched.
+Volcano plots show the effect of perturbation on phosphorylation levels and the statistical significance of the change along the x- and y-axis, respectively. Each point represents a phosphosite, and the thresholds are drawn at a fold change of 3 (or 1.58 in log~2~) and P-value of 0.05. To tease out any functional patterns among proteins whose phosphosites were differentially regulated, a GO enrichment analysis was performed on a list of proteins associated with the colored points above. A list of unregulated proteins identified in the phosphoproteomic analysis was supplied as a reference set. Unfortunately, no GO terms were significantly enriched.
 
 
 \newpage
@@ -176,49 +179,47 @@ rownames(EGFR) = paste0(filter(CTL, Gene.Name == "EGFR")$Amino.acid, filter(CTL,
 plot_heatmap(as.matrix(EGFR))
 ```
 
-To examine the changes in phosphorylation under different conditions at a finer granularity, phosphosites on EGFR were isolated and visualized in a heatmap. The units are log~2~ fold change in intensity. According to PhosphoSitePlus (PTM database focused on curating protein modifications and their functions), phosphorylation on [**Y1172**](https://www.phosphosite.org/siteAction.action?id=3167#1012) and [**Y1197**](https://www.phosphosite.org/siteAction.action?id=3168#984) are associated with induced EGFR activity. Taken together, these results show that EGFR is active upon EGF treatment even when TMEM16A is depleted. In contrast, TMEM16A depletion alone does not appear to induce EGFR activity. This finding, however, does not preclude the possibility that baseline growth signaling is somehow maintained or even increased in the absence of TMEM16A.
+To examine the changes in phosphorylation under different conditions at a finer granularity, phosphosites on EGFR were isolated and visualized on a heatmap. The units are log~2~ fold change in intensity. According to PhosphoSitePlus (PTM database focused on curating protein modifications and their functions), phosphorylation on [**Y1172**](https://www.phosphosite.org/siteAction.action?id=3167#1012) and [**Y1197**](https://www.phosphosite.org/siteAction.action?id=3168#984) are associated with induced EGFR activity. Taken together, these results show that EGFR is active upon EGF treatment even in the absence of TMEM16A. In contrast, TMEM16A depletion alone does not appear to induce EGFR activity. This finding, however, does not preclude the possibility that downstream growth signaling is somehow maintained or even increased in the absence of TMEM16A.
 
 
 \newpage
 ## Figure 6a - Kinase Activity Prediction: shControl+EGF vs shControl
 ```{r echo=FALSE, out.height="4.4in"}
-knitr::include_graphics("kegg\hsa04012.CTL-EGFR.png")
+knitr::include_graphics("kegg/hsa04012.CTL-EGFR.png")
 
-knitr::include_graphics("kegg\hsa05212.CTL-pancreatic.png")
+knitr::include_graphics("kegg/hsa05212.CTL-pancreatic.png")
 ```
 
 \newpage
 ## Figure 6b - Kinase Activity Prediction: shTMEM+EGF vs shTMEM
 ```{r echo=FALSE, out.height="4.4in"}
-knitr::include_graphics("kegg\hsa04012.TMEM-EGFR.png")
+knitr::include_graphics("kegg/hsa04012.TMEM-EGFR.png")
 
-knitr::include_graphics("kegg\hsa05212.TMEM-pancreatic.png")
+knitr::include_graphics("kegg/hsa05212.TMEM-pancreatic.png")
 ```
 
 \newpage
 ## Figure 6c - Kinase Activity Prediction: shTMEM vs shControl
 ```{r echo=FALSE, out.height="4.4in"}
-knitr::include_graphics("kegg\hsa04012.TvC-EGFR.png")
+knitr::include_graphics("kegg/hsa04012.TvC-EGFR.png")
 
-knitr::include_graphics("kegg\hsa05212.TvC-pancreatic.png")
+knitr::include_graphics("kegg/hsa05212.TvC-pancreatic.png")
 ```
 
 \newpage
 ## Figure 6d - Kinase Activity Prediction: shTMEM+EGF vs shControl
 ```{r echo=FALSE, out.height="4.4in"}
-knitr::include_graphics("kegg\hsa04012.TegfvC-EGFR.png")
+knitr::include_graphics("kegg/hsa04012.TegfvC-EGFR.png")
 
-knitr::include_graphics("kegg\hsa05212.TegfvC-pancreatic.png")
+knitr::include_graphics("kegg/hsa05212.TegfvC-pancreatic.png")
 ```
 
 
 \newpage
 ## Figure 6 Discussion
-To investigate the effects of TMEM16A depletion on EGFR signaling, kinase activities were inferred from our phosphoproteomic data. The kinase set enrichment analysis (KSEA) was applied as described by Casado et al. (Science Signaling 2013). The method operates under the notion that kinases are responsible for phosphorylating proteins and, therefore, their activities can be predicted from changes in the phosphorylation of their substrates when the system is perturbed. Once computed, these relative activities were mapped onto the ErbB signaling pathway and the pancreatic cancer model from KEGG. Kinases whose activities could not be inferred due to the absence of associated substrates have a white background. Expression of kinases in AsPc-1 was not considered in this analysis, meaning annotated kinases are not necessarily present in the cell.
+To investigate the effects of TMEM16A depletion on EGFR signaling, kinase activities were inferred from our phosphoproteomic data. The kinase set enrichment analysis (KSEA) was applied as described by Casado et al. (Science Signaling 2013). The method operates under the assumption that the activity of a kinase can be expressed as a function of the average level of phosphorylation across the its substrates. These activities can be compared between two conditions to obtain a measure of relative difference due to perturbation. Once computed, these relative activities were mapped onto the ErbB signaling pathway and the pancreatic cancer model from KEGG. Kinases whose activities could not be inferred due to the absence of associated substrates have a white background. Expression of kinases in AsPc-1 was not considered in this analysis, which means that annotated kinases may not necessarily be present inside the cell.
 
-Four different conditions were tested in **Figures 6a-d**. In **6a**, EGF stimulation turns on EGFR and activates downstream signaling as expected. In **6b**, EGF stimulation in shTMEM16A cells exhibits negligible effect on EGFR and, interestingly, down-regulates signaling activity. In **6c**, TMEM16A depletion produces a close version of EGF-induced signaling despite a weakly activated EGFR. In **6d**, the combination of TMEM16A knockdown and EGF treatment appears to activate EGFR but elicits a weaker downstream effect compared to TMEM16A knockdown alone.
+Four different comparisons were analyzed in **Figures 6a-d**. In **6a**, EGF stimulation turns on EGFR and activates downstream signaling as expected. In **6b**, EGF stimulation in shTMEM16A cells again increases EGFR activity (albeit not as high as control) but interestingly down-regulates growth signaling. In **6c**, TMEM16A knockdown appears to lower basal EGFR activity but in general has minimal effect on downstream signaling activity. In **6d**, the combination of TMEM16A knockdown and EGF treatment weakly activates EGFR but surprisingly translates to a growth-inhibitory response.
 
-In short, the KSEA analysis demonstrates that shTMEM16A cells mimic the increased EGFR signaling observed from EGF treatment in the control line. This is consistent with a previous study showing that TMEM16A depletion has no effect on proliferation. Perhaps more fascinating and novel is our finding that EGFR still responds to EGF even without TMEM16A, but the addition of EGF to shTMEM16A cells oddly negates the increase in shTMEM16A-induced EGFR response.
-
-
+In short, the KSEA analysis shows that TMEM16A is not necessary for EGFR activation but is required for growth signal propagation. TMEM16A knockdown appears to have no negative effect on growth signaling, which is consistent with previous findings that TMEM16A depletion has no effect on proliferation in AsPc-1. However, the addition of EGF to shTMEM16A cells unexpectedly reduces downstream growth signaling to a point below the basal level in control cells.
 

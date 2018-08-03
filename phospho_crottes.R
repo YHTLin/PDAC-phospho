@@ -6,7 +6,7 @@
 # Step 1 - Data Clean-up
 ############################################################
 ## Set working directory
-setwd("C:/Users/Tony Lin/Desktop/Wiita_Lab/Projects/Proteomics_project/Crottes EGF and TMEM16A-dependent signaling pathway/analysis/180606 bR1+2/")
+setwd("C:/Users/Tony Lin/Desktop/Wiita_Lab/Projects/Proteomics_project/Crottes EGF and TMEM16A-dependent signaling pathway/analysis/180802 bR1+2+3/")
 
 
 ## Read in phospho raw file
@@ -78,7 +78,7 @@ filter_valids = function(df, conditions, min_count, at_least_one = FALSE) {
 }
 dataCF = filter_valids(dataC, 
                        c("shControl_CTRL", "shControl_EGF", "shTMEM_CTRL", "shTMEM_EGF"),
-                       min_count = rep(1, 4),
+                       min_count = rep(2, 4),
                        at_least_one = TRUE)
 
 
@@ -150,7 +150,7 @@ dataCFNI = hybrid_impute(dataCFN,
 
 
 ## Perform Welch's t-test (copied from MaxQuant_report_Christine.Rmd)
-welch_test = function(df, diff, bioRep = c("1$", "2$")) {
+welch_test = function(df, diff, bioRep = c("1$", "2$", "3$")) {
   # Function only works for pairwise comparisons
   # df = data frame containing log2 intensity data (AFTER EXCLUDING OR IMPUTING MISSING VALUES)
   # diff = find the Ratio by computing element1 - element2
@@ -296,8 +296,8 @@ plot_volcano = function(df, ratio_cutoff = 1, P_cutoff = 0.05,
   # labeling = boolean indicating whether to include point labels
   # title = character of length 1 indicating plot title
   if (use_adjusted) {
-    df$Pvalue = df$adj.Pvalue
-    df$LOG.Pvalue = df$LOG.adj.Pvalue
+    df$Pvalue = p.adjust(df$Pvalue, method = "BH")
+    df$LOG.Pvalue = -log10(df$Pvalue)
   }
   
   df$color = "black"
@@ -339,8 +339,7 @@ plot_volcano = function(df, ratio_cutoff = 1, P_cutoff = 0.05,
     print(fig + ylab(expression("- log"[10]*"( P-value )")))
   }
 }
-
-#plot_volcano(CTL, use_adjusted = FALSE, labeling = FALSE)
+plot_volcano(CTL, use_adjusted = T, labeling = FALSE)
 
 
 ## HEATMAP VISUALIZATION FUNCTION: pheatmap on Kinase Activities
