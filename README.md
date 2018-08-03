@@ -7,8 +7,10 @@ The calcium-activated chloride channel (TMEM16A), also known as anoctamin 1 (ANO
 Pancreatic ductal adenocarcinoma (PDAC) is the most common type of pancreatic cancer, and TMEM16A is often over-expressed in PDAC cells. Given that TMEM16A directly interacts with EGFR, which in turn can trigger downstream growth signaling, it was hypothesized that TMEM16A over-expression drives the aggressive cell growth in PDAC. However, a study by Sauter et al. showed that TMEM16A silencing by siRNA did not reduce proliferation in PDAC cell lines (Eur J Physio 2015). In order to dissect the mechanism behind the sustained growth, we aim to probe the phosphoproteome of the PDAC cell line AsPc-1 by mass spectrometry.
 
 ## File Description
++ *data folder*: MaxQuant analysis output.
++ *kegg folder*: Figures genereated from mapping kinase activity onto KEGG pathways.
 + *phospho_crottes.R*: R script for data anlysis.
-+ *crottes.RData*: Saved workspace from *phospho_crottes.R* and is loaded by *MaxQuant_report_crottes.Rmd*.
++ *crottes-180802.RData*: Saved workspace from *phospho_crottes.R* and is loaded by *MaxQuant_report_crottes.Rmd*.
 + *MaxQuant_report_crottes.Rmd*: R Markdown file containing figures and descriptions.
 + *MaxQuant_report_crottes.pdf*: PDF generated from *.Rmd* file.
 + *TMEM16A-EGF-phospho-analysis.xlsx*: Output data file from phospho analysis.
